@@ -5,10 +5,14 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+=======
+import java.util.*;
+>>>>>>> buildgradle
 
 /**
  * Created by LaunchCode
@@ -79,7 +83,11 @@ public class JobData {
 
             String aValue = row.get(column);
 
+<<<<<<< HEAD
             if (aValue.contains(value)) {
+=======
+            if (aValue.contains(value.toUpperCase())) {
+>>>>>>> buildgradle
                 jobs.add(row);
             }
         }
@@ -97,8 +105,21 @@ public class JobData {
 
         // load data, if not already loaded
         loadData();
+<<<<<<< HEAD
 
         // TODO - implement this method
+=======
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<HashMap<String,String>>();
+
+        for(HashMap<String, String> row: allJobs) {
+            if ( row.containsValue(value.toUpperCase()) ) {
+                if ( !jobs.contains(row) ) {
+                    jobs.add(row);
+                    // TODO - implement this method
+                }
+            }
+        }
+>>>>>>> buildgradle
         return null;
     }
 
