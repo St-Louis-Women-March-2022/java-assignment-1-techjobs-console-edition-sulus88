@@ -105,17 +105,20 @@ public class JobData {
 
         // TODO - implement this method
 
-        ArrayList<HashMap<String, String>> jobs = new ArrayList<HashMap<String,String>>();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for(HashMap<String, String> row: allJobs) {
-            if ( row.containsValue(value.toUpperCase()) ) {
-                if ( !jobs.contains(row) ) {
+            for (String key : row.keySet()) {
+                String aValue = row.get(key).toUpperCase();
+
+                if ( aValue.contains(value.toUpperCase()) ) {
+
                     jobs.add(row);
                     // TODO - implement this method
+
                 }
             }
         }
-
         return jobs;
     }
 
