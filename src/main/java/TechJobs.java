@@ -10,7 +10,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -32,13 +32,13 @@ public class TechJobs {
 
             String actionChoice = getUserSelection("View jobs by (type 'x' to quit):", actionChoices);
 
-            if (actionChoice == null) {
+            if ( actionChoice == null ) {
                 break;
-            } else if (actionChoice.equals("list")) {
+            } else if ( actionChoice.equals("list") ) {
 
                 String columnChoice = getUserSelection("List", columnChoices);
 
-                if (columnChoice.equals("all")) {
+                if ( columnChoice.equals("all") ) {
                     printJobs(JobData.findAll());
                 } else {
 
@@ -61,7 +61,7 @@ public class TechJobs {
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
 
-                if (searchField.equals("all")) {
+                if ( searchField.equals("all") ) {
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
@@ -94,25 +94,25 @@ public class TechJobs {
                 System.out.println("" + j + " - " + choices.get(choiceKeys[j]));
             }
 
-            if (in.hasNextInt()) {
+            if ( in.hasNextInt() ) {
                 choiceIdx = in.nextInt();
                 in.nextLine();
             } else {
                 String line = in.nextLine();
                 boolean shouldQuit = line.equals("x");
-                if (shouldQuit) {
+                if ( shouldQuit ) {
                     return null;
                 }
             }
 
             // Validate user's input
-            if (choiceIdx < 0 || choiceIdx >= choiceKeys.length) {
+            if ( choiceIdx < 0 || choiceIdx >= choiceKeys.length ) {
                 System.out.println("Invalid choice. Try again.");
             } else {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
@@ -121,20 +121,22 @@ public class TechJobs {
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
 
-        if (someJobs.isEmpty()) {
+        if ( someJobs.size()==0 ) {
             System.out.print("No Results");
             return;
-        } else {
-
-            for (int i = 0; i < someJobs.size(); i++) {
-                System.out.println("\n*****");
-                for (Map.Entry<String, String> item : someJobs.get(i).entrySet()) {
-                    System.out.println(item.getKey() + ": " + item.getValue() );
-                }
-                System.out.println("*****");
-            }
-
         }
+
+            for (HashMap<String, String> job: someJobs) {
+
+                String item = "\n*****\n";
+                for (Map.Entry<String, String> jobColumn : job.entrySet()) {
+                    item += (jobColumn.getKey() + ":" + jobColumn.getValue() + "\n");
+
+                }
+             item += "*****";
+                System.out.println(item);
+            }
 
     }
 }
+
