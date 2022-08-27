@@ -32,11 +32,13 @@ public class TechJobsTest {
         return baos.toString();
     }
 
+
     private static String getFileContents(String fileName) throws IOException {
         Path path = FileSystems.getDefault().getPath(fileName);
-        return Files.readString(path);
-    }
+        String content =  new String(Files.readAllBytes( path ));
+        return content;
 
+    }
     @Test
     public void testPrintJobs() throws IOException {
         String input = "0\n2\nBuzzbold\nx";
